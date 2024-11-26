@@ -98,7 +98,7 @@ int main()
                     temp = temp / 10;
                 }
 
-                temp = temp / 10; // Skip the middle digit
+                temp = temp / 10;
 
                 for (int i = 0; i < mid; i++) {
                     right_side += temp % 10;
