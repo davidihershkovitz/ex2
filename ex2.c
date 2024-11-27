@@ -17,9 +17,9 @@ int main()
 
         if (scanf("%d", &choice) != 1)
         {
-            printf("This option is not available, please try again.\n");
             scanf("%*[^\n]");
             scanf("%*c");
+            printf("This option is not available, please try again.\n");
             continue;
         }
 
@@ -41,25 +41,33 @@ int main()
             int size;
 
             printf("Enter symbols for the eyes, nose, and mouth:\n");
-            if (scanf(" %c %c %c", &eye, &nose, &mouth) != 3)
+            while (scanf(" %c %c %c", &eye, &nose, &mouth) != 3)
             {
-                printf("Invalid input. Please try again.\n");
                 scanf("%*[^\n]");
                 scanf("%*c");
-                continue;
             }
 
-            do
+            // Print the prompt only once
+            printf("Enter face size:\n");
+            int valid_size = 0;
+            while (!valid_size)
             {
-                printf("Enter face size:\n");
-                if (scanf("%d", &size) != 1 || size <= 0 || size % 2 == 0)
+                if (scanf("%d", &size) != 1)
                 {
-                    printf("The face's size must be an odd and positive number, please try again:\n");
                     scanf("%*[^\n]");
                     scanf("%*c");
-                    size = -1;
+                    printf("The face's size must be an odd and positive number, please try again:\n");
+                    continue;
                 }
-            } while (size <= 0 || size % 2 == 0);
+                if (size > 0 && size % 2 != 0)
+                {
+                    valid_size = 1;
+                }
+                else
+                {
+                    printf("The face's size must be an odd and positive number, please try again:\n");
+                }
+            }
 
             int eye_spacing = size;
             int nose_spacing = (size + 1) / 2;
@@ -84,20 +92,19 @@ int main()
             }
             printf("/\n");
         }
-
         if (choice == 2)
         {
             int number, temp, digit_counter = 0, right_side = 0, left_side = 0;
 
+            printf("Enter a number:\n");
             do
             {
-                printf("Enter a number:\n");
                 if (scanf("%d", &number) != 1 || number <= 0)
                 {
                     printf("Only positive number is allowed, please try again:\n");
-                    scanf("%*[^\n]");
-                    scanf("%*c");
-                    number = -1;
+                    scanf("%*[^\n]"); // Clear invalid input
+                    scanf("%*c");     // Consume newline
+                    number = -1;      // Reset number to ensure loop continues
                 }
             } while (number <= 0);
 
@@ -117,14 +124,17 @@ int main()
                 temp = number;
                 int mid = digit_counter / 2;
 
+                // Sum left side digits
                 for (int i = 0; i < mid; i++)
                 {
                     left_side += temp % 10;
                     temp /= 10;
                 }
 
-                temp /= 10; // Skip middle digit
+                // Skip the middle digit
+                temp /= 10;
 
+                // Sum right side digits
                 for (int i = 0; i < mid; i++)
                 {
                     right_side += temp % 10;
@@ -141,20 +151,19 @@ int main()
                 }
             }
         }
-
         if (choice == 3)
         {
             int number, sum = 0;
 
+            printf("Enter a number:\n"); // Print the prompt only once
             do
             {
-                printf("Enter a number:\n");
                 if (scanf("%d", &number) != 1 || number <= 0)
                 {
                     printf("Only positive number is allowed, please try again:\n");
-                    scanf("%*[^\n]");
-                    scanf("%*c");
-                    number = -1;
+                    scanf("%*[^\n]"); // Clear invalid input
+                    scanf("%*c");     // Consume leftover newline
+                    number = -1;      // Ensure the loop continues
                 }
             } while (number <= 0);
 
@@ -175,14 +184,12 @@ int main()
                 printf("This number does not share.\n");
             }
         }
-
         if (choice == 4)
         {
             int number, prime = 1;
-
+            printf("Enter a number:\n");
             do
             {
-                printf("Enter a number:\n");
                 if (scanf("%d", &number) != 1 || number <= 0)
                 {
                     printf("Only positive number is allowed, please try again:\n");
@@ -221,10 +228,9 @@ int main()
         if (choice == 5)
         {
             int number;
-
+            printf("Enter a number:\n");
             do
             {
-                printf("Enter a number:\n");
                 if (scanf("%d", &number) != 1 || number <= 0)
                 {
                     printf("Only positive number is allowed, please try again:\n");
@@ -265,40 +271,41 @@ int main()
         if (choice == 6)
         {
             int smile = 0, cheer = 0, max = 0;
-            int first_attempt = 1;
 
+            // Prompt for smile and cheer numbers
+            printf("Enter a smile and cheer number:\n");
             while (1)
             {
-                if (first_attempt)
+                // Updated scanf to accept optional comma or space
+                if (scanf(" smile :%d %*[ ,] cheer :%d", &smile, &cheer) == 2 && smile > 0 && cheer > 0 && smile != cheer)
                 {
-                    printf("Enter a smile and cheer number:\n");
-                    first_attempt = 0;
-                }
-
-                if (scanf(" smile: %d, cheer: %d", &smile, &cheer) == 2 && smile > 0 && cheer > 0 && smile != cheer)
-                {
-                    break; // Valid input
+                    break; // Valid input, exit loop
                 }
                 else
                 {
                     printf("Only 2 different positive numbers in the given format are allowed for the festival, please try again:\n");
-                    scanf("%*[^\n]");
-                    scanf("%*c");
+                    scanf("%*[^\n]"); // Clear invalid input
+                    scanf("%*c");     // Consume leftover newline
                 }
             }
 
-            do
+            // Prompt for maximum number
+            printf("Enter maximum number for the festival:\n");
+            while (1)
             {
-                printf("Enter maximum number for the festival:\n");
-                if (scanf("%d", &max) != 1 || max <= 0)
+                if (scanf("%d", &max) == 1 && max > 0)
+                {
+                    break; // Valid input, exit loop
+                }
+                else
                 {
                     printf("Only positive maximum number is allowed, please try again:\n");
-                    scanf("%*[^\n]");
-                    scanf("%*c");
-                    max = -1;
+                    scanf("%*[^\n]"); // Clear invalid input
+                    scanf("%*c");     // Consume leftover newline
                 }
-            } while (max <= 0);
+            }
 
+            // Festival logic
             for (int i = 1; i <= max; i++)
             {
                 if (i % smile == 0 && i % cheer == 0)
