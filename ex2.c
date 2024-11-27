@@ -109,12 +109,15 @@ int main()
             } while (number <= 0);
 
             temp = number;
+
+            // Count the digits
             while (temp > 0)
             {
                 digit_counter++;
                 temp /= 10;
             }
 
+            // Check if digit count is odd
             if (digit_counter % 2 == 0)
             {
                 printf("This number isn't balanced and destroys harmony.\n");
@@ -124,7 +127,7 @@ int main()
                 temp = number;
                 int mid = digit_counter / 2;
 
-                // Sum left side digits
+                // Sum right side digits
                 for (int i = 0; i < mid; i++)
                 {
                     left_side += temp % 10;
@@ -134,13 +137,14 @@ int main()
                 // Skip the middle digit
                 temp /= 10;
 
-                // Sum right side digits
+                // Sum left side digits
                 for (int i = 0; i < mid; i++)
                 {
                     right_side += temp % 10;
                     temp /= 10;
                 }
 
+                // Compare left and right sums
                 if (left_side == right_side)
                 {
                     printf("This number is balanced and brings harmony!\n");
@@ -187,6 +191,7 @@ int main()
         if (choice == 4)
         {
             int number, prime = 1;
+
             printf("Enter a number:\n");
             do
             {
@@ -199,12 +204,14 @@ int main()
                 }
             } while (number <= 0);
 
+            // Check if the number is less than 2 (not prime)
             if (number <= 1)
             {
                 prime = 0;
             }
             else
             {
+                // Check divisors from 2 up to sqrt(number)
                 for (int i = 2; i * i <= number; i++)
                 {
                     if (number % i == 0)
@@ -224,7 +231,6 @@ int main()
                 printf("The circle remains incomplete.\n");
             }
         }
-
         if (choice == 5)
         {
             int number;
