@@ -1,3 +1,9 @@
+/******************
+Name: Davidi Hershkovitz
+ID: 214165417
+Assignment: ex2
+*******************/
+
 #include <stdio.h>
 
 int main()
@@ -102,13 +108,13 @@ int main()
                 if (scanf("%d", &number) != 1 || number <= 0)
                 {
                     printf("Only positive numbers are allowed, please try again:\n");
-                    scanf("%*[^\n]"); // Clear invalid input
-                    scanf("%*c");     // Consume newline
-                    number = -1;      // Reset number to ensure loop continues
+                    scanf("%*[^\n]");
+                    scanf("%*c");
+                    number = -1;
                 }
             } while (number <= 0);
 
-            // Count digits
+
             temp = number;
             while (temp > 0)
             {
@@ -123,31 +129,26 @@ int main()
                 int left_sum = 0, right_sum = 0;
                 int mid = digit_counter / 2;
                 int divider = 1;
-                // Compute divider to split the number
+
                 for (int i = 0; i < mid; i++)
                 {
                     divider *= 10;
                 }
 
-                // Split into left and right halves for even-digit numbers
-                int left_half = number / divider;  // First half of the number
-                int right_half = number % divider; // Second half of the number
+                int left_half = number / divider;
+                int right_half = number % divider;
 
-                // Sum digits of the left half
                 while (left_half > 0)
                 {
                     left_sum += left_half % 10;
                     left_half /= 10;
                 }
-
-                // Sum digits of the right half
                 while (right_half > 0)
                 {
                     right_sum += right_half % 10;
                     right_half /= 10;
                 }
 
-                // Compare sums
                 if (left_sum == right_sum)
                 {
                     printf("This number is balanced and brings harmony!\n");
@@ -162,15 +163,15 @@ int main()
         {
             int number, sum = 0;
 
-            printf("Enter a number:\n"); // Print the prompt only once
+            printf("Enter a number:\n");
             do
             {
                 if (scanf("%d", &number) != 1 || number <= 0)
                 {
                     printf("Only positive number is allowed, please try again:\n");
-                    scanf("%*[^\n]"); // Clear invalid input
-                    scanf("%*c");     // Consume leftover newline
-                    number = -1;      // Ensure the loop continues
+                    scanf("%*[^\n]");
+                    scanf("%*c");
+                    number = -1;
                 }
             } while (number <= 0);
 
@@ -201,13 +202,13 @@ int main()
                 if (scanf("%d", &number) != 1 || number <= 0)
                 {
                     printf("Only positive number is allowed, please try again:\n");
-                    scanf("%*[^\n]"); // Clear invalid input
-                    scanf("%*c");     // Consume newline
+                    scanf("%*[^\n]");
+                    scanf("%*c");
                     number = -1;
                 }
             } while (number <= 0);
 
-            // Step 1: Check if the original number is prime
+
             if (number <= 1)
             {
                 prime_original = 0;
@@ -224,15 +225,13 @@ int main()
                 }
             }
 
-            // Step 2: Reverse the number
             int reversed = 0, temp = number;
             while (temp > 0)
             {
-                reversed = reversed * 10 + temp % 10; // Add the last digit to reversed
-                temp /= 10;                           // Remove the last digit from temp
+                reversed = reversed * 10 + temp % 10;
+                temp /= 10;
             }
 
-            // Step 3: Check if the reversed number is prime
             if (reversed <= 1)
             {
                 prime_reversed = 0;
@@ -248,7 +247,6 @@ int main()
                     }
                 }
             }
-            // Step 4: Determine the result
             if (prime_original && prime_reversed)
             {
                 printf("This number completes the circle of joy!\n");
@@ -306,40 +304,36 @@ int main()
         {
             int smile = 0, cheer = 0, max = 0;
 
-            // Prompt for smile and cheer numbers
             printf("Enter a smile and cheer number:\n");
             while (1)
             {
-                // Updated scanf to accept optional comma or space
                 if (scanf(" smile :%d %*[ ,] cheer :%d", &smile, &cheer) == 2 && smile > 0 && cheer > 0 && smile != cheer)
                 {
-                    break; // Valid input, exit loop
+                    break;
                 }
                 else
                 {
                     printf("Only 2 different positive numbers in the given format are allowed for the festival, please try again:\n");
-                    scanf("%*[^\n]"); // Clear invalid input
-                    scanf("%*c");     // Consume leftover newline
+                    scanf("%*[^\n]");
+                    scanf("%*c");
                 }
             }
 
-            // Prompt for maximum number
             printf("Enter maximum number for the festival:\n");
             while (1)
             {
                 if (scanf("%d", &max) == 1 && max > 0)
                 {
-                    break; // Valid input, exit loop
+                    break;
                 }
                 else
                 {
                     printf("Only positive maximum number is allowed, please try again:\n");
-                    scanf("%*[^\n]"); // Clear invalid input
-                    scanf("%*c");     // Consume leftover newline
+                    scanf("%*[^\n]");
+                    scanf("%*c");
                 }
             }
 
-            // Festival logic
             for (int i = 1; i <= max; i++)
             {
                 if (i % smile == 0 && i % cheer == 0)
