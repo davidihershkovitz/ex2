@@ -10,9 +10,9 @@ int main()
 {
     int choice;
 
-    while (1)
+    do
     {
-        printf("Choose an option:\n");
+        printf("\nChoose an option:\n");
         printf("    1. Happy Face\n");
         printf("    2. Balanced Number\n");
         printf("    3. Generous Number\n");
@@ -272,45 +272,39 @@ int main()
             printf("\n");
         }
 
-        if (choice == 6) {
+        if (choice == 6)
+        {
             int smile = 0, cheer = 0, max = 0;
             int first_attempt_smile = 1;
             int first_attempt_max = 1;
 
-            // Loop for valid smile and cheer input
             while (smile <= 0 || cheer <= 0) {
                 if (first_attempt_smile) {
                     printf("Enter a smile and cheer number:\n");
                     first_attempt_smile = 0;
                 }
-
-                // Attempt to parse the input
                 if (scanf(" smile: %d cheer: %d", &smile, &cheer) != 2 || smile <= 0 || cheer <= 0) {
                     printf("Only 2 different positive numbers in the given format are allowed for the festival, please try again:\n");
-                    scanf("%*[^\n]"); // Discard the rest of the invalid input
-                    scanf("%*c");     // Consume the newline character
-                    smile = 0;        // Reset variables
+                    scanf("%*[^\n]");
+                    scanf("%*c");
+                    smile = 0;
                     cheer = 0;
                 }
             }
 
-            // Loop for valid max input
             while (max <= 0) {
                 if (first_attempt_max) {
                     printf("Enter maximum number for the festival:\n");
                     first_attempt_max = 0;
                 }
-
-                // Attempt to parse the max value
                 if (scanf("%d", &max) != 1 || max <= 0) {
                     printf("Only positive maximum number is allowed, please try again:\n");
-                    scanf("%*[^\n]"); // Discard the rest of the invalid input
-                    scanf("%*c");     // Consume the newline character
-                    max = 0;          // Reset variable
+                    scanf("%*[^\n]");
+                    scanf("%*c");
+                    max = 0;
                 }
             }
 
-            // Output Festival of Laughter sequence
             for (int i = 1; i <= max; i++) {
                 if (i % smile == 0 && i % cheer == 0) {
                     printf("Festival!\n");
@@ -323,7 +317,8 @@ int main()
                 }
             }
         }
-    }
+
+    } while (1);
 
     return 0;
 }
