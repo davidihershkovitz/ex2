@@ -94,65 +94,64 @@ int main()
         }
         if (choice == 2)
         {
-            int number, temp, digit_counter = 0, right_side = 0, left_side = 0;
+            int number, temp, digit_counter = 0;
 
             printf("Enter a number:\n");
             do
             {
                 if (scanf("%d", &number) != 1 || number <= 0)
                 {
-                    printf("Only positive number is allowed, please try again:\n");
+                    printf("Only positive numbers are allowed, please try again:\n");
                     scanf("%*[^\n]"); // Clear invalid input
                     scanf("%*c");     // Consume newline
                     number = -1;      // Reset number to ensure loop continues
                 }
             } while (number <= 0);
 
+            // Count digits
             temp = number;
-
-            // Count the digits
             while (temp > 0)
             {
                 digit_counter++;
                 temp /= 10;
             }
 
-            // Check if digit count is odd
-            if (digit_counter % 2 == 0)
+            int left_sum = 0, right_sum = 0;
+            int mid = digit_counter / 2;
+            int divider = 1;
+
+            // Compute divider to split the number
+            for (int i = 0; i < mid; i++)
             {
-                printf("This number isn't balanced and destroys harmony.\n");
+                divider *= 10;
+            }
+
+            // Split into left and right halves for even-digit numbers
+            int left_half = number / divider;  // First half of the number
+            int right_half = number % divider; // Second half of the number
+
+            // Sum digits of the left half
+            while (left_half > 0)
+            {
+                left_sum += left_half % 10;
+                left_half /= 10;
+            }
+
+            // Sum digits of the right half
+            while (right_half > 0)
+            {
+                right_sum += right_half % 10;
+                right_half /= 10;
+            }
+
+            // Compare sums
+            if (left_sum == right_sum)
+            {
+                printf("This number is balanced and brings harmony!\n");
             }
             else
             {
-                temp = number;
-                int mid = digit_counter / 2;
-
-                // Sum right side digits
-                for (int i = 0; i < mid; i++)
-                {
-                    left_side += temp % 10;
-                    temp /= 10;
-                }
-
-                // Skip the middle digit
-                temp /= 10;
-
-                // Sum left side digits
-                for (int i = 0; i < mid; i++)
-                {
-                    right_side += temp % 10;
-                    temp /= 10;
-                }
-
-                // Compare left and right sums
-                if (left_side == right_side)
-                {
-                    printf("This number is balanced and brings harmony!\n");
-                }
-                else
-                {
-                    printf("This number isn't balanced and destroys harmony.\n");
-                }
+                printf("This number isn't balanced and destroys harmony.\n");
             }
         }
         if (choice == 3)
@@ -190,7 +189,7 @@ int main()
         }
         if (choice == 4)
         {
-            int number, prime = 1;
+            int number, prime_original = 1, prime_reversed = 1;
 
             printf("Enter a number:\n");
             do
@@ -198,31 +197,55 @@ int main()
                 if (scanf("%d", &number) != 1 || number <= 0)
                 {
                     printf("Only positive number is allowed, please try again:\n");
-                    scanf("%*[^\n]");
-                    scanf("%*c");
+                    scanf("%*[^\n]"); // Clear invalid input
+                    scanf("%*c");     // Consume newline
                     number = -1;
                 }
             } while (number <= 0);
 
-            // Check if the number is less than 2 (not prime)
+            // Step 1: Check if the original number is prime
             if (number <= 1)
             {
-                prime = 0;
+                prime_original = 0;
             }
             else
             {
-                // Check divisors from 2 up to sqrt(number)
                 for (int i = 2; i * i <= number; i++)
                 {
                     if (number % i == 0)
                     {
-                        prime = 0;
+                        prime_original = 0;
                         break;
                     }
                 }
             }
 
-            if (prime)
+            // Step 2: Reverse the number
+            int reversed = 0, temp = number;
+            while (temp > 0)
+            {
+                reversed = reversed * 10 + temp % 10; // Add the last digit to reversed
+                temp /= 10;                           // Remove the last digit from temp
+            }
+
+            // Step 3: Check if the reversed number is prime
+            if (reversed <= 1)
+            {
+                prime_reversed = 0;
+            }
+            else
+            {
+                for (int i = 2; i * i <= reversed; i++)
+                {
+                    if (reversed % i == 0)
+                    {
+                        prime_reversed = 0;
+                        break;
+                    }
+                }
+            }
+            // Step 4: Determine the result
+            if (prime_original && prime_reversed)
             {
                 printf("This number completes the circle of joy!\n");
             }
@@ -231,6 +254,7 @@ int main()
                 printf("The circle remains incomplete.\n");
             }
         }
+
         if (choice == 5)
         {
             int number;
