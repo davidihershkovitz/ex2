@@ -53,7 +53,6 @@ int main()
                 scanf("%*c");
             }
 
-            // Print the prompt only once
             printf("Enter face size:\n");
             int valid_size = 0;
             while (!valid_size)
@@ -112,7 +111,8 @@ int main()
                     scanf("%*c");
                     number = -1;
                 }
-            } while (number <= 0);
+            }
+            while (number <= 0);
 
 
             temp = number;
@@ -124,7 +124,8 @@ int main()
             if (digit_counter == 1)
             {
                 printf("This number is balanced and brings harmony!\n");
-            } else
+            }
+            else
             {
                 int left_sum = 0, right_sum = 0;
                 int mid = digit_counter / 2;
@@ -173,7 +174,8 @@ int main()
                     scanf("%*c");
                     number = -1;
                 }
-            } while (number <= 0);
+            }
+            while (number <= 0);
 
             for (int i = 1; i <= number / 2; i++)
             {
@@ -206,7 +208,8 @@ int main()
                     scanf("%*c");
                     number = -1;
                 }
-            } while (number <= 0);
+            }
+            while (number <= 0);
 
 
             if (number <= 1)
@@ -270,7 +273,8 @@ int main()
                     scanf("%*c");
                     number = -1;
                 }
-            } while (number <= 0);
+            }
+            while (number <= 0);
 
             printf("Between 1 and %d only these numbers bring happiness: ", number);
 
@@ -290,7 +294,8 @@ int main()
                         current /= 10;
                     }
                     current = sum_of_squares;
-                } while (current != 1 && current != 4);
+                }
+                while (current != 1 && current != 4);
 
                 if (current == 1)
                 {
@@ -307,13 +312,15 @@ int main()
             printf("Enter a smile and cheer number:\n");
             while (1)
             {
-                if (scanf(" smile :%d %*[ ,] cheer :%d", &smile, &cheer) == 2 && smile > 0 && cheer > 0 && smile != cheer)
+                if (scanf(" smile :%d %*[ ,] cheer :%d", &smile, &cheer) == 2 && smile > 0 && cheer > 0 && smile !=
+                    cheer)
                 {
                     break;
                 }
                 else
                 {
-                    printf("Only 2 different positive numbers in the given format are allowed for the festival, please try again:\n");
+                    printf(
+                        "Only 2 different positive numbers in the given format are allowed for the festival, please try again:\n");
                     scanf("%*[^\n]");
                     scanf("%*c");
                 }
@@ -354,7 +361,8 @@ int main()
                 }
             }
         }
-    } while (1);
+    }
+    while (1);
 
     return 0;
 }
