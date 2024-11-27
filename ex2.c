@@ -115,43 +115,47 @@ int main()
                 digit_counter++;
                 temp /= 10;
             }
-
-            int left_sum = 0, right_sum = 0;
-            int mid = digit_counter / 2;
-            int divider = 1;
-
-            // Compute divider to split the number
-            for (int i = 0; i < mid; i++)
-            {
-                divider *= 10;
-            }
-
-            // Split into left and right halves for even-digit numbers
-            int left_half = number / divider;  // First half of the number
-            int right_half = number % divider; // Second half of the number
-
-            // Sum digits of the left half
-            while (left_half > 0)
-            {
-                left_sum += left_half % 10;
-                left_half /= 10;
-            }
-
-            // Sum digits of the right half
-            while (right_half > 0)
-            {
-                right_sum += right_half % 10;
-                right_half /= 10;
-            }
-
-            // Compare sums
-            if (left_sum == right_sum)
+            if (digit_counter == 1)
             {
                 printf("This number is balanced and brings harmony!\n");
-            }
-            else
+            } else
             {
-                printf("This number isn't balanced and destroys harmony.\n");
+                int left_sum = 0, right_sum = 0;
+                int mid = digit_counter / 2;
+                int divider = 1;
+                // Compute divider to split the number
+                for (int i = 0; i < mid; i++)
+                {
+                    divider *= 10;
+                }
+
+                // Split into left and right halves for even-digit numbers
+                int left_half = number / divider;  // First half of the number
+                int right_half = number % divider; // Second half of the number
+
+                // Sum digits of the left half
+                while (left_half > 0)
+                {
+                    left_sum += left_half % 10;
+                    left_half /= 10;
+                }
+
+                // Sum digits of the right half
+                while (right_half > 0)
+                {
+                    right_sum += right_half % 10;
+                    right_half /= 10;
+                }
+
+                // Compare sums
+                if (left_sum == right_sum)
+                {
+                    printf("This number is balanced and brings harmony!\n");
+                }
+                else
+                {
+                    printf("This number isn't balanced and destroys harmony.\n");
+                }
             }
         }
         if (choice == 3)
