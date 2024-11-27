@@ -107,7 +107,7 @@ int main()
             {
                 if (scanf("%d", &number) != 1 || number <= 0)
                 {
-                    printf("Only positive numbers are allowed, please try again:\n");
+                    printf("Only positive number is allowed, please try again:\n");
                     scanf("%*[^\n]");
                     scanf("%*c");
                     number = -1;
