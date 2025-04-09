@@ -9,7 +9,7 @@ Assignment: ex2
 int main()
 {
     int choice;
-
+//menu
     do
     {
         printf("\nChoose an option:\n");
@@ -20,7 +20,7 @@ int main()
         printf("    5. Happy Numbers\n");
         printf("    6. Festival Of Laughter\n");
         printf("    7. Exit\n");
-
+// handling the option that the user picks
         if (scanf("%d", &choice) != 1)
         {
             scanf("%*[^\n]");
@@ -40,36 +40,32 @@ int main()
             printf("Thank you for your journey through Numeria!\n");
             break;
         }
-
+// first task
         if (choice == 1)
         {
             char eye, nose, mouth;
             int size;
 
+            // Get characters from user
             printf("Enter symbols for the eyes, nose, and mouth:\n");
-            while (scanf(" %c %c %c", &eye, &nose, &mouth) != 3)
-            {
+            while (scanf(" %c %c %c", &eye, &nose, &mouth) != 3) {
                 scanf("%*[^\n]");
                 scanf("%*c");
             }
 
+            // Get face size
             printf("Enter face size:\n");
             int valid_size = 0;
-            while (!valid_size)
-            {
-                if (scanf("%d", &size) != 1)
-                {
+            while (!valid_size) {
+                if (scanf("%d", &size) != 1) {
                     scanf("%*[^\n]");
                     scanf("%*c");
                     printf("The face's size must be an odd and positive number, please try again:\n");
                     continue;
                 }
-                if (size > 0 && size % 2 != 0)
-                {
+                if (size > 0 && size % 2 != 0) {
                     valid_size = 1;
-                }
-                else
-                {
+                } else {
                     printf("The face's size must be an odd and positive number, please try again:\n");
                 }
             }
@@ -78,88 +74,75 @@ int main()
             int nose_spacing = (size + 1) / 2;
 
             printf("%c", eye);
-            for (int i = 0; i < eye_spacing; i++)
-            {
+            for (int i = 0; i < eye_spacing; i++) {
                 printf(" ");
             }
             printf("%c\n", eye);
 
-            for (int i = 0; i < nose_spacing; i++)
-            {
+            for (int i = 0; i < nose_spacing; i++) {
                 printf(" ");
             }
             printf("%c\n", nose);
 
             printf("\\");
-            for (int i = 0; i < size; i++)
-            {
-                printf("_");
+            for (int i = 0; i < size; i++) {
+                printf("%c", mouth);
             }
             printf("/\n");
         }
+        // task 2
         if (choice == 2)
         {
-            int number, temp, digit_counter = 0;
+            int number;
 
             printf("Enter a number:\n");
-            do
-            {
-                if (scanf("%d", &number) != 1 || number <= 0)
-                {
+            while (1) {
+                if (scanf("%d", &number) != 1 || number <= 0) {
                     printf("Only positive number is allowed, please try again:\n");
                     scanf("%*[^\n]");
                     scanf("%*c");
-                    number = -1;
+                } else {
+                    break;
                 }
             }
-            while (number <= 0);
-
-
-            temp = number;
-            while (temp > 0)
-            {
-                digit_counter++;
+// checking the num according to the instruction
+            int temp = number;
+            int digit_count = 0;
+            while (temp > 0) {
+                digit_count++;
                 temp /= 10;
             }
-            if (digit_counter == 1)
-            {
-                printf("This number is balanced and brings harmony!\n");
+
+            int divider = 1;
+            for (int i = 1; i < digit_count; ++i) {
+                divider *= 10;
             }
-            else
-            {
-                int left_sum = 0, right_sum = 0;
-                int mid = digit_counter / 2;
-                int divider = 1;
 
-                for (int i = 0; i < mid; i++)
-                {
-                    divider *= 10;
-                }
+            int left_sum = 0, right_sum = 0;
+            int current_digit;
+            for (int i = 0; i < digit_count; ++i) {
+                current_digit = number / divider;
+                number = number % divider;
+                divider /= 10;
 
-                int left_half = number / divider;
-                int right_half = number % divider;
-
-                while (left_half > 0)
-                {
-                    left_sum += left_half % 10;
-                    left_half /= 10;
-                }
-                while (right_half > 0)
-                {
-                    right_sum += right_half % 10;
-                    right_half /= 10;
+                if (digit_count % 2 == 1 && i == digit_count / 2) {
+                    continue;
                 }
 
-                if (left_sum == right_sum)
-                {
-                    printf("This number is balanced and brings harmony!\n");
+                if (i < digit_count / 2) {
+                    left_sum += current_digit;
+                } else {
+                    right_sum += current_digit;
                 }
-                else
-                {
-                    printf("This number isn't balanced and destroys harmony.\n");
-                }
+            }
+
+            if (left_sum == right_sum) {
+                printf("This number is balanced and brings harmony!\n");
+            } else {
+                printf("This number isn't balanced and destroys harmony.\n");
             }
         }
+        //task 3
         if (choice == 3)
         {
             int number, sum = 0;
@@ -175,6 +158,7 @@ int main()
                     number = -1;
                 }
             }
+            // checking the number according to the instructions
             while (number <= 0);
 
             for (int i = 1; i <= number / 2; i++)
@@ -194,6 +178,7 @@ int main()
                 printf("This number does not share.\n");
             }
         }
+        //task 4
         if (choice == 4)
         {
             int number, prime_original = 1, prime_reversed = 1;
@@ -218,6 +203,7 @@ int main()
             }
             else
             {
+                //checking the number according to the instructions
                 for (int i = 2; i * i <= number; i++)
                 {
                     if (number % i == 0)
@@ -259,13 +245,14 @@ int main()
                 printf("The circle remains incomplete.\n");
             }
         }
-
+//task 5
         if (choice == 5)
         {
             int number;
             printf("Enter a number:\n");
             do
             {
+                //checking the number according to the instructions
                 if (scanf("%d", &number) != 1 || number <= 0)
                 {
                     printf("Only positive number is allowed, please try again:\n");
@@ -304,7 +291,7 @@ int main()
             }
             printf("\n");
         }
-
+//task 6
         if (choice == 6)
         {
             int smile = 0, cheer = 0, max = 0;
@@ -325,7 +312,7 @@ int main()
                     scanf("%*c");
                 }
             }
-
+            //checking the number according to the instructions
             printf("Enter maximum number for the festival:\n");
             while (1)
             {
@@ -366,3 +353,5 @@ int main()
 
     return 0;
 }
+
+
